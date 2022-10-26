@@ -1,10 +1,11 @@
 import React from 'react'
 import Navbar from './Navbar';
 import Box from '@mui/material/Box';
-import image from '../Resources/Mask.png';
+import image from '../Resources/HeaderBg.png';
 import { styled } from '@mui/system';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import Img from '../Resources/HeaderImage.png'
 const Item= styled("div")(({theme})=>({
     color:"#b11705",
     fontWeight: 'bold',    
@@ -13,23 +14,26 @@ const Header = () => {
   return (
     <Box sx={{
         width:1,
-        height:{xl:"120vh",lg:"110vh",md:"100vh",sm:"90vh",xs:"85vh"},
+        // height:{xl:"120vh",lg:"110vh",md:"100vh",sm:"90vh",xs:"85vh"},
         backgroundImage:`url(${image})`,
         objectFit:"contain",
         backgroundPosition:"center",
         backgroundSize:"cover"
     }}>
         <Navbar/>
-     <Box sx={{
-        paddingLeft:"6%",
-        paddingTop:"10%",
-        
+     <Box  sx={{
+        paddingInline:"6%",
+        display:"flex",
+        flexDirection:{xl:"row",lg:"row",md:"row",sm:"column",xs:"column"},
+        paddingTop:{xl:"0",lg:"0",md:"0",sm:"30px",xs:"30px"},
+        alignItems:"center",
+       justifyContent:"space-between"
      }}> 
+     <Box sx={{marginBottom:{xl:"8rem",lg:"8rem",md:"8rem",sm:"0",xs:"0"}}}>
      <Item sx={{
-       fontSize:{xl:"2rem",lg:"1.9rem",md:"1.5rem",sm:"1rem",xs:"1rem"},
-       paddingTop:{
-        xl:"3rem",lg:"0rem",md:"5rem",sm:"5rem",xs:"8rem"
-       }
+       fontSize:{xl:"55px",lg:"40px",md:"40px",sm:"30px",xs:"20px"},
+       fontWeight:"700",
+     
      }
        
      }>
@@ -41,9 +45,10 @@ const Header = () => {
         <br />
         
      </Item>
-       <Stack direction="row" spacing={2}>
+     <Stack direction="row" spacing={2}>
        <Box variant="contained" sx={{
         // backgroundColor:"#b11705",
+       
          position:"relative"
        }}> <span style={{
         position:"absolute",
@@ -52,9 +57,18 @@ const Header = () => {
         top:"30%",
         width:"1rem"
        }}></span></Box>
-       <Typography >Trade Crypto and Fiat Currencies.</Typography>
+       <Typography sx={{
+        color:'#672a72',
+        fontWeight:'700',
+        fontSize:{xl:"22px",lg:"22px",md:"20px",sm:"18px",xs:"17px"}
+       }}>Trade Crypto and Fiat Currencies.</Typography>
         
        </Stack>
+     </Box>
+     
+        <img style={{maxWidth:"50%",height:"auto"}} src={Img} alt="" />
+      
+   
      </Box>
     </Box>
   )

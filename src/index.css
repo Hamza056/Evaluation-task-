@@ -8,11 +8,12 @@ body {
 }
 h3{
   color: #5d2c72;
-  
+  /* color: #fdcdf1c0; */
 }
 td{
   padding-inline: .5rem;
 }
+
  h1{
   /* background:linear-gradient(126deg, #b11705 8%, #632969 82%); */
   font-size: 52px;
@@ -21,6 +22,10 @@ td{
   background-clip: text;
   -webkit-text-fill-color: transparent;
   /* color: #f8dcf1; */
+ }
+
+.bgclr{
+  background: -webkit-linear-gradient(126deg, #b11705 8%, #632969 82%);
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -29,3 +34,18 @@ code {
 .Collapsible__trigger is-open > svg{
   display: none;
 }
+.text-flow{
+
+
+/*   display: inline-block; */
+  /* white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; */
+  color: #fff;
+  text-align: center;
+ /* background-color: hsl(46, 100%, 80%); */
+ 
+}
+/* .stb{
+  border-image: repeating-linear-gradient( 45deg, pink, pink 1%, purple 1%, purple 8%) 20;
+} */

@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import Stack from '@mui/material/Stack';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/system';
 import Button from '@mui/material/Button';
 import axios from 'axios';
 import CircularProgress from "@mui/material/CircularProgress";
+import Container from '@mui/material/Container';
+
 const Item= styled("div")(({theme})=>({
     color:"#fff",
     fontWeight: 'bold',
-    flex:1    
+    flex:1,
+   
 }));
 const News = () => {
     const[newsdata,setnewsdata]=useState();
@@ -30,40 +32,43 @@ const News = () => {
     },[]);
   
   return (
+ 
     <Box sx={{
         paddingBlock:"1rem",
         backgroundColor:"#b5142a"
     }}>
-        <Stack direction={{xl:'row',lg:'row',md:'column',sm:'column',xs:'column'}} sx={{
-              display:"flex",
-              justifyContent:"space-between",
-              paddingInline:"10%",
-              
-        }}>
-          
-           { error !== " " &&  <h2>{error}</h2>
-          }
-         
-         <Item>{newsdata?.data[0]?.en?.title}</Item> 
+           <Container sx={{
+            display:'flex',
+            justifyContent:'space-between',
+            alighnItems:'center',
+            flexDirection:{xl:"row",lg:"row",md:"row",sm:"",xs:"column"}
+           }}>
+          <Item className='text-flow' style={{maxWidth:'90vw',display:'flex',alignItems:'center'}}>{newsdata?.data[0]?.en?.details}</Item>
          {
             isFetching && <Box sx={{
                 display:"flex",
                 justifyContent:"center",
                 alignItems:"center"
             }}><CircularProgress /></Box>
+            
           }
-         <Item>{newsdata?.data[0]?.en?.details}</Item>
-         <Button variant="contained" sx={{
+            { error !== " " &&  <h2>{error}</h2>
+          }
+         <Button style={{maxWidth:'100%'}} variant="contained" sx={{
             paddingInline:"2rem",
             backgroundColor:"#fff",
             color:"#b11705",
             fontWeight:"bold",
              maxWidth:"150px",
+             display:'flex',
+             alignSelf:'center',
+           
             "&:hover":{
                 backgroundColor:"#fff",
             }
          }}>Buy | View</Button>
-        </Stack>
+        </Container>
+       
     </Box>
   )
 }

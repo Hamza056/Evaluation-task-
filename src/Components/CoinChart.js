@@ -14,8 +14,6 @@ import Paper from '@mui/material/Paper';
 import CircularProgress from "@mui/material/CircularProgress";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-    //   backgroundColor: theme.palette.common.black,
-    //   color: theme.palette.common.white,
     fontWeight:"bold",
     fontSize:"1rem"
     },
@@ -25,10 +23,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
   
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    '&:nth-of-type(odd)': {
-      backgroundColor: theme.palette.action.hover,
-    },
-    // hide last border
     '&:last-child td, &:last-child th': {
       border: 0,
     },
@@ -53,23 +47,42 @@ const CoinChart = () => {
     },[]);
  
   return (
-    <Stack spacing={2} direction={{xl:"row",lg:"row",md:"row",sm:"column",xs:"column"}}  sx={{
+    <Stack spacing={5} direction={{xl:"row",lg:"row",md:"row",sm:"column",xs:"column"}}  sx={{
         paddingInline:"5%",
         paddingTop:"3%",
          alignItems:"center",
+         justifyContent:'center',
        }}>
-        <Box style={{
-             overflowX: 'auto',
-            }}  sx={{
-            borderTop:1
-        }}>
+        <Box className='border'   sx={{
+            overflowX:'visible',
+            marginTop:"10px",
             
-            { error !== " " &&  <h2>{error}</h2>}          
+        }}>
                     {
-                         <TableContainer sx={{maxWidth:"80vw"}} component={Paper}>
-                         <Table sx={{ minWidth: 200 }} aria-label="customized table">
+                         <TableContainer style={{border:"2px solid rgba(177, 23, 5, 0.25)"}} sx={{maxWidth:"90vw",marginBottom:"70px",
+                         position:"relative",                     
+                             borderTop: 0,
+                         }} component={Paper} >
+                           {
+            isFetching && <Box sx={{
+                display:"flex",
+                justifyContent:"center",
+                alignItems:"center"
+            }}><CircularProgress /></Box>
+          }              
+                         <Table className='stb' sx={{ minWidth: 400 ,
+                        //  borderTop:'2px solid linear-gradient(126deg, #b11705 8%, #632969 82%)',
+                        "&:before":{
+                          content: '""',
+                          display: 'block',
+                          width: '100%',
+                          height: '3px',
+                          
+                          background: 'linear-gradient(126deg, #b11705 8%, #632969 82%)',
+                          top: '0px',
+                          position: 'absolute'}, }} aria-label="customized table">
                            <TableHead>
-                             <TableRow>
+                             <TableRow>  
                                <StyledTableCell >Name</StyledTableCell>
                                <StyledTableCell align="right">Symbol</StyledTableCell>
                                <StyledTableCell align="right">Price</StyledTableCell>
@@ -81,16 +94,35 @@ const CoinChart = () => {
                              </TableRow>
                            </TableHead>
                            <TableBody>
+                           { error !== " " &&  <h2>{error}</h2>} 
                              {coindata?.map((row) => (
                                <StyledTableRow key={row.name}>
-                                 <StyledTableCell component="th" scope="row">
-                                  <img style={{width:"30px"}} src={row.imageURL} alt="" /> {row.name}
+                                 <StyledTableCell sx={{
+                                  backgroundColor:"#f8dcf1ab"
+                                 }} component="th" scope="row">
+                                    <Box sx={{
+                                        display:"flex",
+                                        alighnItems:"center",  
+                                        gap:"3%"
+                                    }}><Box sx={{ display:"flex",
+                                    justifySelf:"flex-start"
+                                    }}><img style={{width:"40px", height:"40px",borderRadius:"50%"}} src={row.imageURL} alt="" /></Box>
+                                    <Box sx={{
+                                        display:"flex",
+                                        alighnItems:"center",
+                                        // textAlign:"center",
+                                        marginTop:"6%"
+                                    }}> {row.name}</Box>
+                                      </Box>
+                                    
                                  </StyledTableCell>
-                                 <StyledTableCell align="right">{row.symbol}</StyledTableCell>
+                                 
+                             
+                                 <StyledTableCell  align="right">{row.symbol}</StyledTableCell>
                                  <StyledTableCell align="right">{row.price}</StyledTableCell>
                                  <StyledTableCell align="right">{row.stageName}</StyledTableCell>
                                  <StyledTableCell align="right">{row.startDate.slice(0,10)}</StyledTableCell>
-                                 <StyledTableCell align="right">{row.FinalDate.slice(0,10)}</StyledTableCell>
+                                 <StyledTableCell sx={{ backgroundColor:"#f8dcf1ab"}} align="right">{row.FinalDate.slice(0,10)}</StyledTableCell>
                                  <StyledTableCell align="right">{row.remainingSupply}</StyledTableCell>
                                  <StyledTableCell align="right">{row.totalSupply}</StyledTableCell>
                                 
@@ -100,15 +132,10 @@ const CoinChart = () => {
                          </Table>
                        </TableContainer>
                     }
-                      {
-            isFetching && <Box sx={{
-                display:"flex",
-                justifyContent:"center",
-                alignItems:"center"
-            }}><CircularProgress /></Box>
-          }   
+                     
         </Box>
         <Box order={{xl:1,lg:1,md:1,sm:-1,xs:-1}} sx={{
+            
              "&::before": {
                 content:'" "',
        display: "block",
@@ -123,15 +150,12 @@ const CoinChart = () => {
             }
         }} style={{
             position:"relative",
-           
-        }}>
+           }}>
             <Typography variant='h1' sx={{
-                fontSize:'45px',
-                fontWeight:"bold"
+                fontSize:'50px',
+                fontWeight:"800"
             }} >COIN <br /> CHART</Typography>
-            <span style={{
-            
-            }}></span>
+           
         </Box>
     </Stack>
   )
